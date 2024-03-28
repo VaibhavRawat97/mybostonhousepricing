@@ -1,0 +1,34 @@
+We have to start by creating a new environment b/c whenever we start a new project we have to create a new environment. 
+
+We'll do this by giving the following on the command prompt:
+
+conda create -p venv python==3.9 -y
+
+After that we'll activate our environment. If we want to activate the environment through command prompt use the following code:
+
+conda activate "C:\Full Stack Data Science Masters(iNEURON)\End to End Boston Project\mybostonhousepricing\venv"
+
+Then we'll create a requirements.txt file where we'll keep and install all the necessary libraries.
+We'll give the following code in the command prompt to install these libraries:
+
+pip install -r requirements.txt
+
+Now after having done all this, lets create our app.py file that will help us to build an application wherein we can take inputs and based on that for our pickle file we'll be able to get our outputs.
+
+Now, when we were working on jupyter notebook and doing EDA, Standardization, FE, Model Training, etc.
+While we were doing the Standardization, we forgot to import or transform this Standardization into a pickle file, because the same pickle file we'll be using here inside our 'app.py' file.
+
+We've already created a pickle file for the model but not for the Standardization, so we're going to execute the ipynb file on jupyter notebook until that particular line and we'll create a pickle file. Then we'll keep that pickle file into the required folder.
+
+We also created a Template so that there's something to look at when we open the HTML webpage. Now that we've done that, we had also created an API by the name of '/predict_api'.
+
+So what happens if we just execute this '/predict_api' by adding it at the end of our web address like 'http://127.0.0.1:5000/predict_api':
+
+We'll get the following:
+
+Method Not Allowed
+The method is not allowed for the requested URL.
+
+Why ? Because the method is 'POST' i.e, we have to give some info/POST from the client end. The info is the data it's looking at. For making that happen we'll use and install 'Postman', rest of the work will be done on the Postman Application.
+
+
