@@ -31,4 +31,30 @@ The method is not allowed for the requested URL.
 
 Why ? Because the method is 'POST' i.e, we have to give some info/POST from the client end. The info is the data it's looking at. For making that happen we'll use and install 'Postman', rest of the work will be done on the Postman Application.
 
+After our work on the Postman Application is done, we'll think of Deploying this into a cloud, once it's deployed into a cloud we'll be Dockerizing it.
+
+Now that we've created an API which is like predict_api which was a POST request, we were collecting the data using Postman and based on that we were giving the output after we're passing it through Scaler Transformation i.e, Standardization. Apart from that we're also passing it through the regression model which is giving us the output. 
+
+But instead of just creating in the form of an API why not create a small web application wherein we just provide the inputs, we submit the form, as soon as we submit the form we take the data over here and do the prediction in the model that we specifically have. Lets try to create this. We'll do this by adding the below lines of code to our app.py file:
+
+@app.route('/predict',methods=['POST'])
+def predict():
+    data=[float(x) for x in request.form.values()]
+    final_input=scalar.transform(np.array(data).reshape(1,-1))
+    print(final_input)
+    output=regmodel.predict(final_input)[0]
+    return render_template("home.html",prediction_text="The predicted house price is {}".format(output))
+
+
+
+Till now we've seen completely End to End Application w.r.t Boston House Pricing Dataset. We also saw this by running it locally by using both API alongwith the entire web application.
+
+Now, after this we'll deploy this entirely into a cloud called Heroku. First we'll see the basic way and then we'll see with Dockers. Heruko is like a Platform As a Service. All we have to do is to make sure that entire configuration is right and just try to deploy it, automatically it'll create or give an instance in the cloud itself and it'll run the entire code over there. 
+
+To get started with the Heroku firstly we need to create a proc file. A proc file specifies some commands that needs to be executed by the app as soon as it starts. So, we'll create a file named 'Procfile' in VS Code itself. 
+
+We're creating a 'Procfile' in VS Code b/c it gives a command/indicates Heroku instance that on start(when this application is started) what command needs to run. The commands we're going to use include 'gunicorn'(green unicorn), gunicorn is a pure Python HTTP server for WSGI applications, it allows you to run python applications concurrently by running multiple processes. 
+
+In short, gunicorn allows the entire python application to run very well b/c it creates multiple python processes, so based on the number of request whenever the client is putting probably 1000's of users are hitting this particular website/web application that we've created. It makes sure that it distributes the entire request through multiple instances and many more.
+
 
